@@ -2025,7 +2025,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						discipline_levels = list()
 						if(result == "Caitiff")
 							generation = 13
-							while (clane.clane_disciplines.len < 3)
+							for (var/selection_count=clane.clane_disciplines.len; selection_count <= 3; selection_count++)
 								if(ishuman(user))
 									break
 								var/list/possible_new_disciplines = subtypesof(/datum/discipline) - clane.clane_disciplines
