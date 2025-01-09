@@ -73,21 +73,8 @@
 					if(p_radio.linked_network == "police")
 						p_radio.announce_crime("shooting", get_turf(user))
 		new firing_effect_type(get_turf(src), firing_dir)
-//		var/atom/movable/firing_effect_movable = new(firing_effect.loc)
 		if(ishuman(user))
 			new /obj/effect/temp_visual/dir_setting/muzzle_flash_highlight(get_turf(src), firing_dir)
-			/*
-			var/mob/living/carbon/human/user_human = user
-			user_human.remove_overlay(FIRING_EFFECT_LAYER)
-			var/mutable_appearance/firing_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "firing", -PROTEAN_LAYER)
-			user_human.overlays_standing[FIRING_EFFECT_LAYER] = firing_overlay
-			user_human.apply_overlay(FIRING_EFFECT_LAYER)
-			firing_effect_movable.set_light(3, 2, "#ffedbb")
-//
-			spawn(2)
-				user_human.remove_overlay(FIRING_EFFECT_LAYER)
-				qdel(firing_effect_movable)
-			*/
 	var/direct_target
 	if(targloc == curloc)
 		if(target) //if the target is right on our location we'll skip the travelling code in the proj's fire()
