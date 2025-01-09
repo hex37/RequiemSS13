@@ -544,7 +544,7 @@
 					H.add_quirk(/datum/quirk/skittish)
 					H.add_quirk(/datum/quirk/pushover)
 				H.create_disciplines()
-				if(isgarou(H))
+				if(splatted_garou(H))
 					for(var/obj/structure/werewolf_totem/S in GLOB.totems)
 						if(S.tribe == H.auspice.tribe)
 							H.forceMove(get_turf(S))

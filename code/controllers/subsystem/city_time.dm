@@ -63,7 +63,7 @@ SUBSYSTEM_DEF(city_time)
 //									P.add_experience(1)
 //									H.total_contracted = 0
 /*								var/toreador_bonus = 0
-								if(iskindred(H) && H.clane)
+								if(splatted_kindred(H) && H.clane)
 									if(H.clane.name == "Toreador")
 										toreador_bonus = 1*/
 								if(H.total_erp > 1500)
@@ -112,7 +112,7 @@ SUBSYSTEM_DEF(city_time)
 //									P.add_experience(3)
 //									H.total_contracted = 0
 /*								var/toreador_bonus = 0
-								if(iskindred(H) && H.clane)
+								if(splatted_kindred(H) && H.clane)
 									if(H.clane.name == "Toreador")
 										toreador_bonus = 1*/
 								if(H.total_erp > 9000)
@@ -151,7 +151,7 @@ SUBSYSTEM_DEF(city_time)
 //			won = "sabbat"
 		for(var/mob/living/carbon/human/H in GLOB.human_list)
 			var/area/vtm/V = get_area(H)
-			if(iskindred(H) && V.upper)
+			if(splatted_kindred(H) && V.upper)
 				H.death()
 //			if(won)
 //				if(H.vampire_faction == won)

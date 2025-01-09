@@ -260,7 +260,7 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 //							if(H.total_contracted > 1)
 //								P.add_experience(1)
 /*							var/toreador_bonus = 0
-							if(iskindred(H) && H.clane)
+							if(splatted_kindred(H) && H.clane)
 								if(H.clane.name == "Toreador")
 									toreador_bonus = 1*/
 							if(H.total_erp > 9000)

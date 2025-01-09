@@ -1306,7 +1306,7 @@
 		fully_replace_character_name(real_name, dna.species.random_name())
 
 /mob/living/carbon/human/species/kindred
-	race = /datum/species/kindred
+	race = /datum/species/supernatural/kindred
 
 /mob/living/carbon/human/species/vamp_mannequin
 	race = /datum/species/vamp_mannequin

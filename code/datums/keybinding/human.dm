@@ -100,12 +100,12 @@
 		if(BD.grab_state > GRAB_PASSIVE)
 			if(ishuman(BD.pulling))
 				var/mob/living/carbon/human/PB = BD.pulling
-				if(isghoul(user.mob))
-					if(!iskindred(PB))
+				if(splatted_ghoul(user.mob))
+					if(!splatted_kindred(PB))
 						SEND_SOUND(BD, sound('code/modules/wod13/sounds/need_blood.ogg', 0, 0, 75))
 						to_chat(BD, "<span class='warning'>Eww, that is <b>GROSS</b>.</span>")
 						return
-				if(!isghoul(user.mob) && !iskindred(user.mob))
+				if(!splatted_ghoul(user.mob) && !splatted_kindred(user.mob))
 					SEND_SOUND(BD, sound('code/modules/wod13/sounds/need_blood.ogg', 0, 0, 75))
 					to_chat(BD, "<span class='warning'>Eww, that is <b>GROSS</b>.</span>")
 					return
@@ -113,7 +113,7 @@
 					SEND_SOUND(BD, sound('code/modules/wod13/sounds/need_blood.ogg', 0, 0, 75))
 					to_chat(BD, "<span class='warning'>This creature is <b>DEAD</b>.</span>")
 					return
-				if(PB.bloodpool <= 0 && !iskindred(BD.pulling))
+				if(PB.bloodpool <= 0 && !splatted_kindred(BD.pulling))
 					SEND_SOUND(BD, sound('code/modules/wod13/sounds/need_blood.ogg', 0, 0, 75))
 					to_chat(BD, "<span class='warning'>There is no <b>BLOOD</b> in this creature.</span>")
 					return
@@ -132,12 +132,12 @@
 						PB.emote("groan")
 				PB.add_bite_animation()
 			if(isliving(BD.pulling))
-				if (!iskindred(BD))
+				if (!splatted_kindred(BD))
 					SEND_SOUND(BD, sound('code/modules/wod13/sounds/need_blood.ogg', 0, 0, 75))
 					to_chat(BD, "<span class='warning'>Eww, that is <b>GROSS</b>.</span>")
 					return
 				var/mob/living/LV = BD.pulling
-				if(LV.bloodpool <= 0 && !iskindred(BD.pulling))
+				if(LV.bloodpool <= 0 && !splatted_kindred(BD.pulling))
 					SEND_SOUND(BD, sound('code/modules/wod13/sounds/need_blood.ogg', 0, 0, 75))
 					to_chat(BD, "<span class='warning'>There is no <b>BLOOD</b> in this creature.</span>")
 					return
@@ -155,7 +155,7 @@
 							BD.AdjustMasquerade(-1)
 					else
 						playsound(BD, 'code/modules/wod13/sounds/kiss.ogg', 50, TRUE)
-					if(iskindred(LV))
+					if(splatted_kindred(LV))
 						var/mob/living/carbon/human/HV = BD.pulling
 						if(HV.stakeimmune)
 							to_chat(BD, "<span class='warning'>There is no <b>HEART</b> in this creature.</span>")

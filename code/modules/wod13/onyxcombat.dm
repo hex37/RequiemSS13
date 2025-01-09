@@ -4,7 +4,7 @@
 /mob/living/carbon/human/death()
 	. = ..()
 
-	if(iskindred(src))
+	if(splatted_kindred(src))
 		SSmasquerade.dead_level = min(1000, SSmasquerade.dead_level+50)
 	else
 		if(istype(get_area(src), /area/vtm))
@@ -29,7 +29,7 @@
 	GLOB.masquerade_breakers_list -= src
 	GLOB.sabbatites -= src
 
-	if(iskindred(src))
+	if(splatted_kindred(src))
 		qdel(getorganslot(ORGAN_SLOT_BRAIN)) //NO REVIVAL EVER
 		if(in_frenzy)
 			exit_frenzymod()
@@ -286,12 +286,12 @@
 		if(BD.grab_state > GRAB_PASSIVE)
 			if(ishuman(BD.pulling))
 				var/mob/living/carbon/human/PB = BD.pulling
-				if(isghoul(usr))
-					if(!iskindred(PB))
+				if(splatted_ghoul(usr))
+					if(!splatted_kindred(PB))
 						SEND_SOUND(BD, sound('code/modules/wod13/sounds/need_blood.ogg', 0, 0, 75))
 						to_chat(BD, "<span class='warning'>Eww, that is <b>GROSS</b>.</span>")
 						return
-				if(!isghoul(usr) && !iskindred(usr))
+				if(!splatted_ghoul(usr) && !splatted_kindred(usr))
 					SEND_SOUND(BD, sound('code/modules/wod13/sounds/need_blood.ogg', 0, 0, 75))
 					to_chat(BD, "<span class='warning'>Eww, that is <b>GROSS</b>.</span>")
 					return
@@ -299,7 +299,7 @@
 					SEND_SOUND(BD, sound('code/modules/wod13/sounds/need_blood.ogg', 0, 0, 75))
 					to_chat(BD, "<span class='warning'>This creature is <b>DEAD</b>.</span>")
 					return
-				if(PB.bloodpool <= 0 && !iskindred(BD.pulling))
+				if(PB.bloodpool <= 0 && !splatted_kindred(BD.pulling))
 					SEND_SOUND(BD, sound('code/modules/wod13/sounds/need_blood.ogg', 0, 0, 75))
 					to_chat(BD, "<span class='warning'>There is no <b>BLOOD</b> in this creature.</span>")
 					return
@@ -323,12 +323,12 @@
 						PB.emote("groan")
 				PB.add_bite_animation()
 			if(isliving(BD.pulling))
-				if (!iskindred(BD))
+				if (!splatted_kindred(BD))
 					SEND_SOUND(BD, sound('code/modules/wod13/sounds/need_blood.ogg', 0, 0, 75))
 					to_chat(BD, "<span class='warning'>Eww, that is <b>GROSS</b>.</span>")
 					return
 				var/mob/living/LV = BD.pulling
-				if(LV.bloodpool <= 0 && !iskindred(BD.pulling))
+				if(LV.bloodpool <= 0 && !splatted_kindred(BD.pulling))
 					SEND_SOUND(BD, sound('code/modules/wod13/sounds/need_blood.ogg', 0, 0, 75))
 					to_chat(BD, "<span class='warning'>There is no <b>BLOOD</b> in this creature.</span>")
 					return
@@ -346,7 +346,7 @@
 							BD.AdjustMasquerade(-1)
 					else
 						playsound(BD, 'code/modules/wod13/sounds/kiss.ogg', 50, TRUE)
-					if(iskindred(LV))
+					if(splatted_kindred(LV))
 						var/mob/living/carbon/human/HV = BD.pulling
 						if(HV.stakeimmune)
 							to_chat(BD, "<span class='warning'>There is no <b>HEART</b> in this creature.</span>")
@@ -681,7 +681,7 @@
 	update_auspex_hud()
 
 /mob/living/carbon/human/Life()
-	if(!iskindred(src))
+	if(!splatted_kindred(src))
 		if(prob(5))
 			adjustCloneLoss(-1, TRUE)
 	update_blood_hud()
@@ -729,7 +729,7 @@
 /mob/living/proc/update_rage_hud()
 	if(!client || !hud_used)
 		return
-	if(isgarou(src) || iswerewolf(src))
+	if(splatted_garou(src) || iswerewolf(src))
 		if(hud_used.rage_icon)
 			hud_used.rage_icon.overlays -= gnosis
 			var/mob/living/carbon/C = src

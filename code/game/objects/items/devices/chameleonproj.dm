@@ -10,7 +10,7 @@
 				if(H)
 					to_chat(H, "<span class='scream_away'><b>[name]</b> says, \"[sanitize_text(message)]\"</span>")
 		if(prob(25))
-			if(iskindred(src))
+			if(splatted_kindred(src))
 				if(clane)
 					if(clane.name == "Malkavian")
 						for(var/mob/living/carbon/human/H in GLOB.malkavian_list)
