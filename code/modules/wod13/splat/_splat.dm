@@ -8,6 +8,18 @@
 	var/power_stat_current = 0
 	/// And they all have special snowflake names.
 	var/list/splat_traits = null
+	var/morality_name = 
+	var/morality_level = 7
+
+
+/datum/splat/Initialize()
+	. = ..()
+
+/datum/splat/proc/Apply()
+	SHOULD_CALL_PARENT(TRUE)
+
+/datum/splat/proc/Remove()
+	SHOULD_CALL_PARENT(TRUE)
 
 /// We'll use this for signals to fuck with supernaturals and whatever else
 /datum/splat/supernatural

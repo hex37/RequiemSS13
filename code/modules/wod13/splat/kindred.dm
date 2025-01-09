@@ -48,6 +48,8 @@
 	var/last_bloodheal_click = 0					//
 	var/last_bloodpower_click = 0					//
 	var/last_drinkblood_click = 0					//
+	var/masquerade = 5								//
+	var/last_masquerade_violation = 0				//
 
 /datum/action/vampireinfo
 	name = "About Me"

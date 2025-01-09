@@ -255,12 +255,6 @@
 	var/true_real_name
 	var/died_already = FALSE	//PSEUDO_M huh?
 
-	var/bloodpool = 5	//PSEUDO_M_K
-	var/maxbloodpool = 5 // PSEUDO_M_K
-	var/generation = 13	//PSEUDO_M_K
-	var/humanity = 7	//PSEUDO_M this should be a mind thing
-	var/masquerade = 5	//PSEUDO_M_K
-	var/last_masquerade_violation = 0	//PSEUDO_M_K
 	var/last_nonraid = 0
 	var/warrant = FALSE
 	var/ignores_warrant = FALSE
