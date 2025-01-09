@@ -8,8 +8,8 @@
 	var/power_stat_current = 0
 	/// And they all have special snowflake names.
 	var/list/splat_traits = null
-	var/morality_name = 
-	var/morality_level = 7
+	var/integrity_name = "Integrity" //PSEUDO_M move this to minds instead and have splats
+	var/integrity_level = 7			 //or other things modify when necessary
 
 
 /datum/splat/Initialize()

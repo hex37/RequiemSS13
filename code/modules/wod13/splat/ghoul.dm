@@ -1,6 +1,6 @@
 /datum/splat/supernatural/ghoul
 
-/datum/species/supernatural/ghoul
+/datum/splat/supernatural/ghoul
 	name = "Ghoul"
 	id = "ghoul"
 	default_color = "FFFFFF"
@@ -45,7 +45,7 @@
 			dat += "[host.real_name],"
 		if(!host.real_name)
 			dat += "Unknown,"
-		var/datum/species/supernatural/ghoul/G
+		var/datum/splat/supernatural/ghoul/G
 		if(host.dna.species.name == "Ghoul")
 			G = host.dna.species
 			dat += " the ghoul"
@@ -82,59 +82,8 @@
 			if(0)
 				masquerade_level = "'m danger to the Masquerade and my own kind."
 		dat += "Camarilla thinks I[masquerade_level]<BR>"
-//		var/humanity = "I'm out of my mind."
-//		switch(host.humanity)
-//			if(8 to 10)
-//				humanity = "I'm the best example of mercy and kindness."
-//			if(7)
-//				humanity = "I have nothing to complain about my humanity."
-//			if(5 to 6)
-//				humanity = "I'm slightly above the humane."
-//			if(4)
-//				humanity = "I don't care about kine."
-//			if(2 to 3)
-//				humanity = "There's nothing bad in murdering for <b>BLOOD</b>."
-//			if(1)
-//				humanity = "I'm slowly falling into madness..."
-//		dat += "[humanity]<BR>"
-		dat += "<b>Physique</b>: [host.physique] + [host.additional_physique]<BR>"
-		dat += "<b>Dexterity</b>: [host.dexterity] + [host.additional_dexterity]<BR>"
-		dat += "<b>Social</b>: [host.social] + [host.additional_social]<BR>"
-		dat += "<b>Mentality</b>: [host.mentality] + [host.additional_mentality]<BR>"
-		dat += "<b>Cruelty</b>: [host.blood] + [host.additional_blood]<BR>"
-		dat += "<b>Lockpicking</b>: [host.lockpicking] + [host.additional_lockpicking]<BR>"
-		dat += "<b>Athletics</b>: [host.athletics] + [host.additional_athletics]<BR>"
-		if(host.Myself)
-			if(host.Myself.Friend)
-				if(host.Myself.Friend.owner)
-					dat += "<b>My friend's name is [host.Myself.Friend.owner.true_real_name].</b><BR>"
-					if(host.Myself.Friend.phone_number)
-						dat += "Their number is [host.Myself.Friend.phone_number].<BR>"
-					if(host.Myself.Friend.friend_text)
-						dat += "[host.Myself.Friend.friend_text]<BR>"
-			if(host.Myself.Enemy)
-				if(host.Myself.Enemy.owner)
-					dat += "<b>My nemesis is [host.Myself.Enemy.owner.true_real_name]!</b><BR>"
-					if(host.Myself.Enemy.enemy_text)
-						dat += "[host.Myself.Enemy.enemy_text]<BR>"
-			if(host.Myself.Lover)
-				if(host.Myself.Lover.owner)
-					dat += "<b>I'm in love with [host.Myself.Lover.owner.true_real_name].</b><BR>"
-					if(host.Myself.Lover.phone_number)
-						dat += "Their number is [host.Myself.Lover.phone_number].<BR>"
-					if(host.Myself.Lover.lover_text)
-						dat += "[host.Myself.Lover.lover_text]<BR>"
-		if(length(host.knowscontacts) > 0)
-			dat += "<b>I know some other of my kind in this city. Need to check my phone, there definetely should be:</b><BR>"
-			for(var/i in host.knowscontacts)
-				dat += "-[i] contact<BR>"
-		for(var/datum/vtm_bank_account/account in GLOB.bank_account_list)
-			if(host.bank_id == account.bank_id)
-				dat += "<b>My bank account code is: [account.code]</b><BR>"
-		host << browse(dat, "window=vampire;size=400x450;border=1;can_resize=1;can_minimize=0")
-		onclose(host, "ghoul", src)
 
-/datum/species/supernatural/ghoul/on_species_gain(mob/living/carbon/human/C)
+/datum/splat/supernatural/ghoul/on_species_gain(mob/living/carbon/human/C)
 	..()
 	C.update_body(0)
 	C.last_experience = world.time+3000
@@ -149,7 +98,7 @@
 	C.maxHealth = 200
 	C.health = 200
 
-/datum/species/supernatural/ghoul/on_species_loss(mob/living/carbon/human/C, datum/species/new_species, pref_load)
+/datum/splat/supernatural/ghoul/on_species_loss(mob/living/carbon/human/C, datum/species/new_species, pref_load)
 	. = ..()
 	for(var/datum/action/A in C.actions)
 		if(A)
@@ -171,7 +120,7 @@
 		var/mob/living/carbon/human/H = owner
 		if(istype(H.pulling, /mob/living/carbon/human))
 			var/mob/living/carbon/human/VIT = H.pulling
-			if(splatted_kindred(VIT))
+			if(is_kindred(VIT))
 				if(VIT.bloodpool)
 					if(VIT.getBruteLoss() > 30)
 						taking = TRUE
@@ -278,10 +227,10 @@
 		H.update_blood_hud()
 		H.visible_message("<span class='warning'>Some of [H]'s visible injuries disappear!</span>", "<span class='warning'>Some of your injuries disappear!</span>")
 
-/datum/species/supernatural/ghoul/check_roundstart_eligible()
+/datum/splat/supernatural/ghoul/check_roundstart_eligible()
 	return TRUE
 
-/datum/species/supernatural/ghoul/spec_life(mob/living/carbon/human/H)
+/datum/splat/supernatural/ghoul/spec_life(mob/living/carbon/human/H)
 	. = ..()
 	if(HAS_TRAIT(H, TRAIT_UNMASQUERADE))
 		if(H.CheckEyewitness(H, H, 7, FALSE))
@@ -350,7 +299,7 @@
  * Arguments:
  * * searched_discipline - Name or typepath of the Discipline being searched for.
  */
-/datum/species/supernatural/ghoul/proc/get_discipline(searched_discipline)
+/datum/splat/supernatural/ghoul/proc/get_discipline(searched_discipline)
 	for(var/datum/discipline/discipline in disciplines)
 		if (ispath(searched_discipline, /datum/discipline))
 			if (istype(discipline, searched_discipline))

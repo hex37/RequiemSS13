@@ -72,7 +72,7 @@
 	H.SwitchBlocking()
 	return TRUE
 
-/datum/keybinding/human/bite
+/datum/keybinding/human/bite // PSEUDO_M_K need to add vampire section to controls
 	hotkey_keys = list("F")
 	name = "bite"
 	full_name = "Bite"
@@ -93,19 +93,15 @@
 		if(world.time < BD.last_drinkblood_click+10)
 			return
 		BD.last_drinkblood_click = world.time
-//		if(BD.bloodpool >= BD.maxbloodpool)
-//			SEND_SOUND(BD, sound('code/modules/wod13/need_blood.ogg'))
-//			to_chat(BD, "<span class='warning'>You're full of <b>BLOOD</b>.</span>")
-//			return
 		if(BD.grab_state > GRAB_PASSIVE)
 			if(ishuman(BD.pulling))
 				var/mob/living/carbon/human/PB = BD.pulling
-				if(splatted_ghoul(user.mob))
-					if(!splatted_kindred(PB))
+				if(is_ghoul(user.mob))
+					if(!is_kindred(PB))
 						SEND_SOUND(BD, sound('code/modules/wod13/sounds/need_blood.ogg', 0, 0, 75))
 						to_chat(BD, "<span class='warning'>Eww, that is <b>GROSS</b>.</span>")
 						return
-				if(!splatted_ghoul(user.mob) && !splatted_kindred(user.mob))
+				if(!is_ghoul(user.mob) && !is_kindred(user.mob))
 					SEND_SOUND(BD, sound('code/modules/wod13/sounds/need_blood.ogg', 0, 0, 75))
 					to_chat(BD, "<span class='warning'>Eww, that is <b>GROSS</b>.</span>")
 					return
@@ -113,7 +109,7 @@
 					SEND_SOUND(BD, sound('code/modules/wod13/sounds/need_blood.ogg', 0, 0, 75))
 					to_chat(BD, "<span class='warning'>This creature is <b>DEAD</b>.</span>")
 					return
-				if(PB.bloodpool <= 0 && !splatted_kindred(BD.pulling))
+				if(PB.bloodpool <= 0 && !is_kindred(BD.pulling))
 					SEND_SOUND(BD, sound('code/modules/wod13/sounds/need_blood.ogg', 0, 0, 75))
 					to_chat(BD, "<span class='warning'>There is no <b>BLOOD</b> in this creature.</span>")
 					return
@@ -132,12 +128,12 @@
 						PB.emote("groan")
 				PB.add_bite_animation()
 			if(isliving(BD.pulling))
-				if (!splatted_kindred(BD))
+				if (!is_kindred(BD))
 					SEND_SOUND(BD, sound('code/modules/wod13/sounds/need_blood.ogg', 0, 0, 75))
 					to_chat(BD, "<span class='warning'>Eww, that is <b>GROSS</b>.</span>")
 					return
 				var/mob/living/LV = BD.pulling
-				if(LV.bloodpool <= 0 && !splatted_kindred(BD.pulling))
+				if(LV.bloodpool <= 0 && !is_kindred(BD.pulling))
 					SEND_SOUND(BD, sound('code/modules/wod13/sounds/need_blood.ogg', 0, 0, 75))
 					to_chat(BD, "<span class='warning'>There is no <b>BLOOD</b> in this creature.</span>")
 					return
@@ -155,7 +151,7 @@
 							BD.AdjustMasquerade(-1)
 					else
 						playsound(BD, 'code/modules/wod13/sounds/kiss.ogg', 50, TRUE)
-					if(splatted_kindred(LV))
+					if(is_kindred(LV))
 						var/mob/living/carbon/human/HV = BD.pulling
 						if(HV.stakeimmune)
 							to_chat(BD, "<span class='warning'>There is no <b>HEART</b> in this creature.</span>")

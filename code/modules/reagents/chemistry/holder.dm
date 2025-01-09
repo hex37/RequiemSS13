@@ -363,7 +363,7 @@
 		return
 
 	var/allowed_to_kindred = FALSE
-	if(splatted_kindred(target))
+	if(is_kindred(target))
 		if(methods & VAMPIRE)
 			allowed_to_kindred = TRUE
 		if(!allowed_to_kindred)

@@ -1,6 +1,6 @@
 /datum/splat/supernatural/garou
 
-/datum/species/supernatural/garou/spec_life(mob/living/carbon/human/H)
+/datum/splat/supernatural/garou/spec_life(mob/living/carbon/human/H)
 	. = ..()
 	if(HAS_TRAIT(H, TRAIT_UNMASQUERADE))
 		if(H.CheckEyewitness(H, H, 7, FALSE))
