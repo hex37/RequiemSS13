@@ -3470,7 +3470,6 @@
 #include "code\modules\wod13\areas\area.dm"
 #include "code\modules\wod13\areas\vtm.dm"
 #include "code\modules\wod13\areas\exterior\chinatown.dm"
-#include "code\modules\wod13\areas\exterior\exterior.dm"
 #include "code\modules\wod13\areas\exterior\financialdistrict.dm"
 #include "code\modules\wod13\areas\exterior\fishermanswharf.dm"
 #include "code\modules\wod13\areas\exterior\ghetto.dm"
