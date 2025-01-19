@@ -14,18 +14,18 @@
  * * difficulty - the number that a dice must come up as to count as a success.
  * * numerical - whether the proc returns number of successes or outcome (botch, failure, success)
  */
-/proc/storyteller_roll(dice = 1, difficulty = 6, numerical = FALSE, roll_header="", show_player=TRUE)
+/mob/proc/storyteller_roll(dice = 1, difficulty = 6, numerical = FALSE, roll_header="", show_player=TRUE, roll_viewers = list(src))
 	#ifdef DEBUG
 	show_player = TRUE
 	#endif
 
-	else if(show_player && usr.client.prefs.chat_toggles & CHAT_ROLL_INFO)
-		storyteller_roll_pretty(dice, difficulty, numerical, roll_header)
+	if(show_player)
+		storyteller_roll_pretty(dice, difficulty, numerical, roll_header, roll_viewers)
 	else
 		storyteller_roll_basic(dice, difficulty, numerical)
 
 //DO NOT CALL DIRECTLY
-/proc/storyteller_roll_basic(dice, difficulty, numerical)
+/mob/proc/storyteller_roll_basic(dice, difficulty, numerical)
 	var/successes = 0
 	var/had_one = FALSE
 	var/had_success = FALSE
@@ -56,18 +56,18 @@
 			return ROLL_SUCCESS
 
 //DO NOT CALL DIRECTLY
-/proc/storyteller_roll_pretty(dice, difficulty, numerical, roll_header)
+/mob/proc/storyteller_roll_pretty(dice, difficulty, numerical, roll_header, roll_viewers)
 	var/successes = 0
 	var/had_one = FALSE
 	var/had_success = FALSE
 	var/list/success_list = new()
 	var/list/fail_list = new()
 	if(roll_header && roll_header != "")
-		to_chat(usr, "<h2>[roll_header]</h2>")
-	to_chat(usr, "<h2>Difficulty: [difficulty]</h2>")
+		roll_to_chat_list(roll_viewers, "<h2>[roll_header]</h2>")
+	roll_to_chat_list(roll_viewers, "<h2>Difficulty: [difficulty]</h2>")
 
 	if (dice < 1)
-		to_chat(usr, "<h2>Your Roll: <span style='color:DarkRed'>Auto Failure!</span></h2>")
+		roll_to_chat_list(roll_viewers, "<h2>Your Roll: <span style='color:DarkRed'>Auto Failure!</span></h2>")
 		if (numerical)
 			return 0
 		else
@@ -116,16 +116,19 @@
 		roll_log += " - <span style='color:green'>[successes] Success[(successes > 1) ? "es":""]</span></h2>"
 		trinary_result = ROLL_SUCCESS
 
-	to_chat(usr, roll_log)
+	roll_to_chat_list(roll_viewers, roll_log)
 
 	if (numerical)
 		return successes
 	else
 		return trinary_result
 
+/mob/proc/roll_to_chat_list(var/list/viewers, var/input)
+	for(var/mob/viewer in viewers)
+		if(viewer.client.prefs.chat_toggles & CHAT_ROLL_INFO)
+			to_chat(viewer, input)
 
-
-/proc/get_dice_char(var/input)
+/mob/proc/get_dice_char(var/input)
 	switch(input)
 		if(1)
 			return "❶"
@@ -151,7 +154,7 @@
 			return "⓿"
 
 
-/proc/vampireroll(var/dices_num = 1, var/hardness = 1, var/atom/rollviewer)
+/mob/proc/vampireroll(var/dices_num = 1, var/hardness = 1, var/atom/rollviewer)
 	var/wins = 0
 	var/crits = 0
 	var/brokes = 0

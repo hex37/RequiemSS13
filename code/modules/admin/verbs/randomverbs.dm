@@ -1052,7 +1052,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	set desc = "Roll WoD dice at yourself."
 	var/dice_count = input("Input amount of dice to roll:") as num
 	var/difficulty = input("Input roll difficulty:") as num
-	storyteller_roll(dice_count, difficulty)
+	usr.storyteller_roll(dice_count, difficulty)
 
 /client/proc/show_tip()
 	set category = "Admin"
